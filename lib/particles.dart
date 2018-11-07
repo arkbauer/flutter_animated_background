@@ -369,12 +369,14 @@ abstract class ParticleBehaviour extends Behaviour {
   @protected
   @mustCallSuper
   void onOptionsUpdate(ParticleOptions oldOptions) {
-    if (particles.length > options.particleCount)
-      particles.removeRange(0, particles.length - options.particleCount);
-    else if (particles.length < options.particleCount) {
-      final int particlesToSpawn = options.particleCount - particles.length;
-      final newParticles = generateParticles(particlesToSpawn);
-      particles.addAll(newParticles);
+    if (particles != null) {
+      if (particles.length > options.particleCount)
+        particles.removeRange(0, particles.length - options.particleCount);
+      else if (particles.length < options.particleCount) {
+        final int particlesToSpawn = options.particleCount - particles.length;
+        final newParticles = generateParticles(particlesToSpawn);
+        particles.addAll(newParticles);
+      }
     }
   }
 
