@@ -460,17 +460,19 @@ class RandomParticleBehaviour extends ParticleBehaviour {
     super.onOptionsUpdate(oldOptions);
     double minSpeedSqr = options.spawnMinSpeed * options.spawnMinSpeed;
     double maxSpeedSqr = options.spawnMaxSpeed * options.spawnMaxSpeed;
-    for (Particle p in particles) {
-      // speed assignment is better done this way, to prevent calculation of square roots if not needed
-      double speedSqr = p.speedSqr;
-      if (speedSqr > maxSpeedSqr)
-        p.speed = options.spawnMaxSpeed;
-      else if (speedSqr < minSpeedSqr) p.speed = options.spawnMinSpeed;
+    if (particles != null) {
+      for (Particle p in particles) {
+        // speed assignment is better done this way, to prevent calculation of square roots if not needed
+        double speedSqr = p.speedSqr;
+        if (speedSqr > maxSpeedSqr)
+          p.speed = options.spawnMaxSpeed;
+        else if (speedSqr < minSpeedSqr) p.speed = options.spawnMinSpeed;
 
-      // TODO: handle opacity change
+        // TODO: handle opacity change
 
-      if (p.radius < options.spawnMinRadius ||
-          p.radius > options.spawnMaxRadius) initRadius(p);
+        if (p.radius < options.spawnMinRadius ||
+            p.radius > options.spawnMaxRadius) initRadius(p);
+      }
     }
   }
 }
